@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import app.amano.nayu.listview.databinding.ActivityMainBinding
-import app.amano.nayu.listview.utils.getStringArrayPref
+import app.amano.nayu.listview.utils.getStringArrayList
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater).apply { setContentView(this.root) }
 
-        val data = getStringArrayPref(this@MainActivity)
+        val data = getStringArrayList(this@MainActivity)
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, data)
         binding.list.adapter = adapter
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val data = getStringArrayPref(this@MainActivity)
+        val data = getStringArrayList(this@MainActivity)
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, data)
         binding.list.adapter = adapter
     }

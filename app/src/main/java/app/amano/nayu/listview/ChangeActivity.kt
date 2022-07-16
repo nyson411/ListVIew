@@ -6,7 +6,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import app.amano.nayu.listview.databinding.ActivityChangeBinding
-import app.amano.nayu.listview.utils.getStringArrayPref
+import app.amano.nayu.listview.utils.getStringArrayList
 import org.json.JSONArray
 
 class ChangeActivity : AppCompatActivity() {
@@ -23,7 +23,7 @@ class ChangeActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
 
         binding.deleteButton.setOnClickListener {
-            val data = getStringArrayPref(this@ChangeActivity)
+            val data = getStringArrayList(this@ChangeActivity)
             data.removeAt(position)
             val jsonArray = JSONArray(data)
             val editor = pref.edit()
@@ -34,7 +34,7 @@ class ChangeActivity : AppCompatActivity() {
         }
 
         binding.saveButton.setOnClickListener {
-            val data = getStringArrayPref(this@ChangeActivity)
+            val data = getStringArrayList(this@ChangeActivity)
             data[position] = binding.changeText.text.toString()
             val jsonArray = JSONArray(data)
             val editor = pref.edit()

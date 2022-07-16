@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import org.json.JSONArray
 
-internal fun getStringArrayPref(context: Context): ArrayList<String> {
+internal fun getStringArrayList(context: Context): ArrayList<String> {
     val pref: SharedPreferences = context.getSharedPreferences("SharedPref", Context.MODE_PRIVATE)
     val arrayString = pref.getString("data", null)
 
