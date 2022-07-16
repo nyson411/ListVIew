@@ -17,13 +17,13 @@ class AddActivity : AppCompatActivity() {
         binding = ActivityAddBinding.inflate(layoutInflater).apply { setContentView(this.root) }
 
         val pref: SharedPreferences = getSharedPreferences("SharedPref", Context.MODE_PRIVATE)
-        val data = getStringArrayList(this@AddActivity)
+        val memoList = getStringArrayList(this@AddActivity)
 
         binding.sendButton.setOnClickListener {
             val text = binding.memoText.text.toString()
-            data.add(text)
+            memoList.add(text)
             val editor = pref.edit()
-            val jsonArray = JSONArray(data)
+            val jsonArray = JSONArray(memoList)
             editor.putString("data", jsonArray.toString())
             editor.apply()
             finish()

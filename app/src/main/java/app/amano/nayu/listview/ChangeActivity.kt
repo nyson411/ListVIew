@@ -23,9 +23,9 @@ class ChangeActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
 
         binding.deleteButton.setOnClickListener {
-            val data = getStringArrayList(this@ChangeActivity)
-            data.removeAt(position)
-            val jsonArray = JSONArray(data)
+            val memoList = getStringArrayList(this@ChangeActivity)
+            memoList.removeAt(position)
+            val jsonArray = JSONArray(memoList)
             val editor = pref.edit()
             editor.putString("data", jsonArray.toString())
             editor.apply()
@@ -34,9 +34,9 @@ class ChangeActivity : AppCompatActivity() {
         }
 
         binding.saveButton.setOnClickListener {
-            val data = getStringArrayList(this@ChangeActivity)
-            data[position] = binding.changeText.text.toString()
-            val jsonArray = JSONArray(data)
+            val memoList = getStringArrayList(this@ChangeActivity)
+            memoList[position] = binding.changeText.text.toString()
+            val jsonArray = JSONArray(memoList)
             val editor = pref.edit()
             editor.putString("data", jsonArray.toString())
             editor.apply()

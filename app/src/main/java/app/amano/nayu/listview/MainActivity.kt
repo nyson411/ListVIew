@@ -15,9 +15,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater).apply { setContentView(this.root) }
 
-        val data = getStringArrayList(this@MainActivity)
+        val memoList = getStringArrayList(this@MainActivity)
 
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, data)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, memoList)
         binding.list.adapter = adapter
 
         binding.plusButton.setOnClickListener {
@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val data = getStringArrayList(this@MainActivity)
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, data)
+        val memoList = getStringArrayList(this@MainActivity)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, memoList)
         binding.list.adapter = adapter
     }
 }
