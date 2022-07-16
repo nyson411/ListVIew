@@ -9,7 +9,9 @@ import app.amano.nayu.listview.databinding.ActivityChangeBinding
 import org.json.JSONArray
 
 class ChangeActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityChangeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val pref: SharedPreferences = getSharedPreferences("SharedPref", Context.MODE_PRIVATE)

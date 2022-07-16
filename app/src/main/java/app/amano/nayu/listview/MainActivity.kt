@@ -10,6 +10,7 @@ import app.amano.nayu.listview.databinding.ActivityMainBinding
 import org.json.JSONArray
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         binding.list.adapter = adapter
     }
 
-    protected fun getStringArrayPref(): ArrayList<String> {
+    private fun getStringArrayPref(): ArrayList<String> {
 
         val pref: SharedPreferences = getSharedPreferences("SharedPref", Context.MODE_PRIVATE)
 

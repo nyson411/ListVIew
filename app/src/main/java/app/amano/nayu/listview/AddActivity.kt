@@ -8,7 +8,9 @@ import app.amano.nayu.listview.databinding.ActivityAddBinding
 import org.json.JSONArray
 
 class AddActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityAddBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddBinding.inflate(layoutInflater).apply { setContentView(this.root) }
