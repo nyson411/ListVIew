@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import app.amano.nayu.listview.databinding.ActivityAddBinding
+import app.amano.nayu.listview.utils.getStringArrayPref
 import org.json.JSONArray
 
 class AddActivity : AppCompatActivity() {
@@ -16,7 +17,7 @@ class AddActivity : AppCompatActivity() {
         binding = ActivityAddBinding.inflate(layoutInflater).apply { setContentView(this.root) }
 
         val pref: SharedPreferences = getSharedPreferences("SharedPref", Context.MODE_PRIVATE)
-        val data = getStringArrayPref()
+        val data = getStringArrayPref(this@AddActivity)
 
         binding.sentBotton.setOnClickListener {
             val text = binding.memoText.text.toString()
@@ -26,25 +27,6 @@ class AddActivity : AppCompatActivity() {
             editor.putString("data", jsonArray.toString())
             editor.apply()
             finish()
-        }
-    }
-
-    private fun getStringArrayPref(): ArrayList<String> {
-
-        val pref: SharedPreferences = getSharedPreferences("SharedPref", Context.MODE_PRIVATE)
-
-        val list = arrayListOf<String>()
-
-        val a = pref.getString("data", null)
-        if (a != null) {
-            val jsonArray = JSONArray(a)
-
-            for (i in 0 until jsonArray.length()) {
-                list.add(jsonArray.get(i) as String)
-            }
-            return list
-        } else {
-            return list
         }
     }
 }
