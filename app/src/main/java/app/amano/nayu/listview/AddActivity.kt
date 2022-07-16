@@ -14,6 +14,7 @@ class AddActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddBinding.inflate(layoutInflater).apply { setContentView(this.root) }
+
         val pref: SharedPreferences = getSharedPreferences("SharedPref", Context.MODE_PRIVATE)
         val data = getStringArrayPref()
 

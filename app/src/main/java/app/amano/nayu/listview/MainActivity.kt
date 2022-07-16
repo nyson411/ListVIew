@@ -21,11 +21,12 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, data)
         binding.list.adapter = adapter
+
         binding.plusBotton.setOnClickListener {
             val intent = Intent(this, AddActivity::class.java)
-
             startActivity(intent)
         }
+
         binding.list.setOnItemClickListener { parent, view, position, id ->
             val intent = Intent(this, ChangeActivity::class.java)
             intent.putExtra("position", position)
