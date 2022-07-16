@@ -1,6 +1,5 @@
 package app.amano.nayu.listview
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -28,6 +27,7 @@ class ChangeActivity : AppCompatActivity() {
             finish()
             startActivity(intent)
         }
+
         binding.saveBotton.setOnClickListener{
             val data=getStringArrayPref()
             data[position]=binding.changeText.text.toString()
