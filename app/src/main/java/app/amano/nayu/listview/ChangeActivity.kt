@@ -22,7 +22,7 @@ class ChangeActivity : AppCompatActivity() {
         val position = intent.getIntExtra("position", 0)
         val intent = Intent(this, MainActivity::class.java)
 
-        binding.deleteBotton.setOnClickListener {
+        binding.deleteButton.setOnClickListener {
             val data = getStringArrayPref(this@ChangeActivity)
             data.removeAt(position)
             val jsonArray = JSONArray(data)
@@ -33,7 +33,7 @@ class ChangeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.saveBotton.setOnClickListener {
+        binding.saveButton.setOnClickListener {
             val data = getStringArrayPref(this@ChangeActivity)
             data[position] = binding.changeText.text.toString()
             val jsonArray = JSONArray(data)

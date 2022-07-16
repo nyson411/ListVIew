@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, data)
         binding.list.adapter = adapter
 
-        binding.plusBotton.setOnClickListener {
+        binding.plusButton.setOnClickListener {
             val intent = Intent(this, AddActivity::class.java)
             startActivity(intent)
         }

@@ -19,7 +19,7 @@ class AddActivity : AppCompatActivity() {
         val pref: SharedPreferences = getSharedPreferences("SharedPref", Context.MODE_PRIVATE)
         val data = getStringArrayPref(this@AddActivity)
 
-        binding.sentBotton.setOnClickListener {
+        binding.sendButton.setOnClickListener {
             val text = binding.memoText.text.toString()
             data.add(text)
             val editor = pref.edit()
