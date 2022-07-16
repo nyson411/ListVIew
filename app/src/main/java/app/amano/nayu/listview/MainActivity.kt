@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import app.amano.nayu.listview.databinding.ActivityMainBinding
+import app.amano.nayu.listview.utils.MEMO_LIST_KEY
+import app.amano.nayu.listview.utils.POSITION_LIST_KEY
 import app.amano.nayu.listview.utils.getStringArrayList
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater).apply { setContentView(this.root) }
 
-        val memoList = getStringArrayList(this@MainActivity)
+        val memoList = getStringArrayList(this@MainActivity, MEMO_LIST_KEY)
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, memoList)
         binding.list.adapter = adapter
@@ -27,14 +29,14 @@ class MainActivity : AppCompatActivity() {
 
         binding.list.setOnItemClickListener { parent, view, position, id ->
             val intent = Intent(this, ChangeActivity::class.java)
-            intent.putExtra("position", position)
+            intent.putExtra(POSITION_LIST_KEY, position)
             startActivity(intent)
         }
     }
 
     override fun onResume() {
         super.onResume()
-        val memoList = getStringArrayList(this@MainActivity)
+        val memoList = getStringArrayList(this@MainActivity, MEMO_LIST_KEY)
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, memoList)
         binding.list.adapter = adapter
     }
