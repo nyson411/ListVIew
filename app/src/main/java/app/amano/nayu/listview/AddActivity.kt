@@ -14,11 +14,13 @@ import org.json.JSONArray
 
 class AddActivity : AppCompatActivity() {
     private lateinit var binding:ActivityAddBinding
+    val pref: SharedPreferences = getSharedPreferences("SharedPref", Context.MODE_PRIVATE)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityAddBinding.inflate(layoutInflater).apply { setContentView(this.root) }
         val pref: SharedPreferences =getSharedPreferences("SharedPref", Context.MODE_PRIVATE)
-        val data=getStringArrayPref()
+        val data=getStringArrayPref(JSONArray(pref.getString("titleData", null)))
 
 
         binding.sentBotton.setOnClickListener {
@@ -32,13 +34,11 @@ class AddActivity : AppCompatActivity() {
         }
     }
 
-    private fun getStringArrayPref():ArrayList<String>  {
+    private fun getStringArrayPref(a:JSONArray):ArrayList<String>  {
 
-        val pref: SharedPreferences = getSharedPreferences("SharedPref", Context.MODE_PRIVATE)
 
         val list = arrayListOf<String>()
 
-        val a=pref.getString("data", null)
         if(a!=null) {
             val jsonArray = JSONArray(a)
 
