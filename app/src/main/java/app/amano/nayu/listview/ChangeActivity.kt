@@ -3,62 +3,56 @@ package app.amano.nayu.listview
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import app.amano.nayu.listview.databinding.ActivityChangeBinding
+import app.amano.nayu.listview.utils.*
+import app.amano.nayu.listview.utils.getStringArrayList
 import org.json.JSONArray
+import java.nio.file.Files.delete
 
 class ChangeActivity : AppCompatActivity() {
-    private lateinit var binding:ActivityChangeBinding
+
+    private lateinit var binding: ActivityChangeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val pref: SharedPreferences = getSharedPreferences("SharedPref", Context.MODE_PRIVATE)
+        val db = AppDatabase.getInstance(this@ChangeActivity)!!
 
         binding = ActivityChangeBinding.inflate(layoutInflater).apply { setContentView(this.root) }
-        val position = intent.getIntExtra("position", 0)
-        val intent= Intent(this,MainActivity::class.java)
-        binding.deleteBotton.setOnClickListener {
-            val data = getStringArrayPref()
-            data.removeAt(position)
-            val jsonArray=JSONArray(data)
-            val editor=pref.edit()
-            editor.putString("data",jsonArray.toString())
-            editor.apply()
-            finish()
+
+//        val pref: SharedPreferences = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+
+        val position = intent.getIntExtra(POSITION_LIST_KEY, 0)
+        val intent = Intent(this, MainActivity::class.java)
+        val list= db.messageDao().getAll()
+
+      //  val room = RoomManager(this)
+
+        binding.deleteButton.setOnClickListener {
+//            val messageList = getStringArrayList(this@ChangeActivity, MESSAGE_LIST_KEY)
+//            val titleList= getStringArrayList(this, TITLE_LIST_KEY)
+//            messageList.removeAt(position)
+//            titleList.removeAt(position)
+//            putStringArrayList(this, MESSAGE_LIST_KEY,messageList)
+//            putStringArrayList(this, TITLE_LIST_KEY,titleList)
+
+            val message=Message(uid=list[position].uid,title=list[position].title,main=list[position].main)
+            db.messageDao().delete(message)
             startActivity(intent)
         }
 
-        binding.saveBotton.setOnClickListener{
-            val data=getStringArrayPref()
-            data[position]=binding.changeText.text.toString()
-            val jsonArray=JSONArray(data)
-            val editor=pref.edit()
-            editor.putString("data",jsonArray.toString())
-            editor.apply()
-            finish()
+        binding.saveButton.setOnClickListener {
+//            val messageList = getStringArrayList(this@ChangeActivity, MESSAGE_LIST_KEY)
+//            val titleList= getStringArrayList(this, TITLE_LIST_KEY)
+            val main = binding.messageText.text.toString()
+            val title = binding.titleText.text.toString()
+//            putStringArrayList(this, MESSAGE_LIST_KEY,messageList)
+//            putStringArrayList(this, TITLE_LIST_KEY,titleList)
+            val list= db.messageDao().getAll()
+            val message=Message(uid=list[position].uid,title,main)
+            db.messageDao().update(message)
             startActivity(intent)
-
-        }
-    }
-
-
-    private fun getStringArrayPref(): ArrayList<String> {
-
-        val pref: SharedPreferences = getSharedPreferences("SharedPref", Context.MODE_PRIVATE)
-
-        val list = arrayListOf<String>()
-
-        val a = pref.getString("data", null)
-        if (a != null) {
-            val jsonArray = JSONArray(a)
-
-            for (i in 0 until jsonArray.length()) {
-                list.add(jsonArray.get(i) as String)
-
-            }
-            return list
-        } else {
-            return list
         }
     }
 }

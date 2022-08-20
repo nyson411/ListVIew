@@ -9,6 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ListView">
+<!--        <activity-->
+<!--            android:name=".FlowerListViewHolder"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".ListAdapter"-->
+<!--            android:exported="false" />-->
+
+<!--        <meta-data-->
+<!--            android:name="com.google.android.actions"-->
+<!--            android:resource="@xml/list_item" />-->
+
         <activity
             android:name=".ChangeActivity"
             android:exported="false" />

@@ -1,71 +1,60 @@
 package app.amano.nayu.listview
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ListView
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import app.amano.nayu.listview.databinding.ActivityMainBinding
-import org.json.JSONArray
+import app.amano.nayu.listview.utils.POSITION_LIST_KEY
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding:ActivityMainBinding
-    val pref: SharedPreferences = getSharedPreferences("SharedPref", Context.MODE_PRIVATE)
+
+    private lateinit var binding: ActivityMainBinding
+    lateinit var db: AppDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater).apply { setContentView(this.root) }
+        db = AppDatabase.getInstance(applicationContext)!!
 
 
-        val a=pref.getString("titleData", null)
-        val titleData = getStringArrayPref(a)
-        val b=pref.getString("mainText"null)
-        val mainData=getStringArrayPref(b)
+        val adapter = ListAdapter(this@MainActivity)
+        val dividerItemDecoration =
+            DividerItemDecoration(this, LinearLayoutManager(this).getOrientation())
+        binding.recyclerView.addItemDecoration(dividerItemDecoration)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+//        val titleList= getStringArrayList(this, TITLE_LIST_KEY)
+//        val messageList = getStringArrayList(this, MESSAGE_LIST_KEY)
+//        adapter.titleList.addAll(titleList)
+//        adapter.messageList.addAll(messageList)
+        //db = AppDatabase.getInstance(this.applicationContext)!!
+        adapter.messageList.addAll(db.messageDao().getAll())
 
 
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, data)
-        binding.list.adapter = adapter
-        binding.plusBotton.setOnClickListener {
+
+        binding.plusButton.setOnClickListener {
             val intent = Intent(this, AddActivity::class.java)
-
-            startActivity(intent)
-        }
-        binding.list.setOnItemClickListener{ parent,view,position,id ->
-            val intent =Intent(this,ChangeActivity::class.java)
-            intent.putExtra("position",position)
             startActivity(intent)
         }
 
 
-
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-        val data = getStringArrayPref()
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, data)
-        binding.list.adapter = adapter
-
-    }
-    protected fun getStringArrayPref(a:JSONArray):ArrayList<String>  {
-
-
-        val list = arrayListOf<String>()
-
-        if(a!=null) {
-            val jsonArray = JSONArray(a)
-
-            for (i in 0 until jsonArray.length()) {
-                list.add(jsonArray.get(i) as String)
-
+        adapter.setOnItemClickListener(object : ListAdapter.OnItemClickListener {
+            override fun onItemClickListener(position: Int, clickedText: String) {
+                val intent = Intent(this@MainActivity, ChangeActivity::class.java)
+                intent.putExtra(POSITION_LIST_KEY, position)
+                startActivity(intent)
             }
-            return list
-        }else{
-            return list
+        })
+        binding.plusButton.setOnClickListener() {
+            val intent = Intent(this@MainActivity, AddActivity::class.java)
+            startActivity(intent)
         }
+
     }
+
 }

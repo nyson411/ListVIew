@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/nayuy/AndroidStudioProjects/ListView/app/src/main/res/layout/activity_add.xml" value="0.14130434782608695" />
-        <entry key="..\:/Users/nayuy/AndroidStudioProjects/ListView/app/src/main/res/layout/activity_change.xml" value="0.2171875" />
-        <entry key="..\:/Users/nayuy/AndroidStudioProjects/ListView/app/src/main/res/layout/activity_main.xml" value="0.14130434782608695" />
-        <entry key="..\:/Users/nayuy/AndroidStudioProjects/ListView/app/src/main/res/layout/list_item.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/nayuy/Downloads/ListVIew-feedback-doggy20220716/ListVIew-feedback-doggy20220716/app/src/main/res/drawable/ic_launcher_background.xml" value="0.224" />
+        <entry key="..\:/Users/nayuy/Downloads/ListVIew-feedback-doggy20220716/ListVIew-feedback-doggy20220716/app/src/main/res/layout/activity_add.xml" value="0.22" />
+        <entry key="..\:/Users/nayuy/Downloads/ListVIew-feedback-doggy20220716/ListVIew-feedback-doggy20220716/app/src/main/res/layout/activity_change.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/nayuy/Downloads/ListVIew-feedback-doggy20220716/ListVIew-feedback-doggy20220716/app/src/main/res/layout/activity_main.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/nayuy/Downloads/ListVIew-feedback-doggy20220716/ListVIew-feedback-doggy20220716/app/src/main/res/layout/lis_item.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/nayuy/Downloads/ListVIew-feedback-doggy20220716/ListVIew-feedback-doggy20220716/app/src/main/res/layout/list_item.xml" value="0.2171875" />
       </map>
     </option>
   </component>
